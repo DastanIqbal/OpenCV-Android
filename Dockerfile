@@ -45,5 +45,8 @@ RUN mdkir /home/opencv/ && cd /home/opencv/
 #RUN unzip opencv.zip
 #RUN unzip opencv-contrib.zip
 
+ADD android_env.sh /etc/profile.d/
+RUN . /etc/profile.d/android_env.sh
+
 # Clean Up
 RUN apk del build-dependencies && rm -rf /var/cache/apk/*
