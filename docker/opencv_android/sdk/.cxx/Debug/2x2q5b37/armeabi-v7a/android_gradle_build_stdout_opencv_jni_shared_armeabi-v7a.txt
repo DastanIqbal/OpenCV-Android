@@ -1,0 +1,2 @@
+ninja: Entering directory `/Users/admin/Iqbal/Study/OpenCV/OpenCV-Docker/opencv_android/sdk/.cxx/Debug/2x2q5b37/armeabi-v7a'
+ninja: no work to do.
