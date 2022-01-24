@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dastaniqbal/android-opencv
+    # container_name: android_opencv
+    restart: unless-stopped
+    tty: true
+    working_dir: /home/opencv
+    volumes:
+       - ./opencv/:/home/opencv
