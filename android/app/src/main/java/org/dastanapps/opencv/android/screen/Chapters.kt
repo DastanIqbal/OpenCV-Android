@@ -3,6 +3,7 @@ package org.dastanapps.opencv.android.screen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,7 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import org.dastanapps.opencv.android.navigation.NavGraph
 import org.dastanapps.opencv.android.ui.MyAppBarBackArrow
@@ -45,7 +45,7 @@ fun Chapters(
             items(items = list, itemContent = {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .padding(0.dp)
                         .clickable {
                             click.invoke(NavGraph.Tutorials.withArgs(it.name, it.id.toString()))

@@ -8,6 +8,7 @@ import org.dastanapps.opencv.android.screen.Chapters
 import org.dastanapps.opencv.android.screen.Home
 import org.dastanapps.opencv.android.screen.ShowTutorial
 import org.dastanapps.opencv.android.screen.Tutorials
+import org.dastanapps.opencv.android.tutorials.mocva.Chapter1Blur
 import org.dastanapps.opencv.android.vm.Chapter
 import org.dastanapps.opencv.android.vm.MainViewModel
 import org.dastanapps.opencv.android.vm.Tutorial
@@ -74,7 +75,10 @@ fun Navigation(
             val name = it.arguments?.getString("name")
             val list = viewModel.tutorial(chapterId!!, tutorialId!!)
             list?.first()?.run {
-                ShowTutorial(name!!, this,navController)
+                when (this.id) {
+                    111 -> Chapter1Blur(name!!, navController)
+                    else -> ShowTutorial(name!!, this, navController)
+                }
             }
         }
     }
