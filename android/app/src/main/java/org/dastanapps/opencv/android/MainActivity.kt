@@ -13,12 +13,28 @@ import org.dastanapps.opencv.android.screen.Home
 import org.dastanapps.opencv.android.ui.theme.LearnOpenCVAndroidTheme
 import org.dastanapps.opencv.android.vm.MainViewModel
 import org.dastanapps.opencv.android.vm.SourceMedium
-import org.opencv.android.InstallCallbackInterface
+import org.opencv.android.BaseLoaderCallback
 import org.opencv.android.LoaderCallbackInterface
 import org.opencv.android.OpenCVLoader
 
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<MainViewModel>()
+
+    private val mLoaderCallback = object : BaseLoaderCallback(this) {
+        override fun onManagerConnected(status: Int) {
+            Log.d("OpenCV", "Status:$status")
+            when (status) {
+                SUCCESS -> {
+                    toast(this@MainActivity, "$status: Success")
+                }
+                else -> {
+                    super.onManagerConnected(status)
+                    toast(this@MainActivity, "$status: Failed")
+                }
+            }
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,24 +48,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, object : LoaderCallbackInterface {
-            override fun onManagerConnected(status: Int) {
-                Log.d("OpenCV", "Status:$status")
-                when (status) {
-                    LoaderCallbackInterface.SUCCESS -> {
-
-                    }
-                    else -> {
-
-                    }
-                }
-            }
-
-            override fun onPackageInstall(operation: Int, callback: InstallCallbackInterface?) {
-                Log.d("OpenCV", "Operation:$operation")
-            }
-
-        })
+        if (!OpenCVLoader.initDebug()) {
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, mLoaderCallback)
+        } else {
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS)
+        }
     }
 }
 

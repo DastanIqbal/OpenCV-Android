@@ -20,8 +20,9 @@ fun bitmap(context: Context, uri: Uri?): Bitmap? {
             .Media.getBitmap(context.contentResolver, uri)
 
     } else {
-        val source = ImageDecoder
-            .createSource(context.contentResolver, uri)
-        ImageDecoder.decodeBitmap(source)
+        val source = ImageDecoder.createSource(context.contentResolver, uri)
+        ImageDecoder.decodeBitmap(source) { decoder, p1, p2 ->
+            decoder.isMutableRequired = true
+        }
     }
 }

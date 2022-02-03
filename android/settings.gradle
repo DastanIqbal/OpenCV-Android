@@ -13,9 +13,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "LearnOpenCV-Android"
-include ':app'
-
 
 def opencvsdk='../docker/opencv_android'
 include ':opencv'
 project(':opencv').projectDir = new File(opencvsdk + '/sdk')
+
+include ':app'

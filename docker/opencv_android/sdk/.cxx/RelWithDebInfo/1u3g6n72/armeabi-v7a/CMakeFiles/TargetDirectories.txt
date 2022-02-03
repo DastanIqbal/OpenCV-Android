@@ -1,3 +1,0 @@
-/Users/admin/Iqbal/Study/OpenCV/OpenCV-Docker/opencv_android/sdk/.cxx/RelWithDebInfo/1u3g6n72/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/Users/admin/Iqbal/Study/OpenCV/OpenCV-Docker/opencv_android/sdk/.cxx/RelWithDebInfo/1u3g6n72/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/admin/Iqbal/Study/OpenCV/OpenCV-Docker/opencv_android/sdk/.cxx/RelWithDebInfo/1u3g6n72/armeabi-v7a/CMakeFiles/opencv_jni_shared.dir

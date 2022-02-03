@@ -1,7 +1,0 @@
-Executable : /Users/admin/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
-arguments : 
--C
-/Users/admin/Iqbal/Study/OpenCV/OpenCV-Docker/opencv_android/sdk/.cxx/Debug/2x2q5b37/armeabi-v7a
-opencv_jni_shared
-jvmArgs : 
-
