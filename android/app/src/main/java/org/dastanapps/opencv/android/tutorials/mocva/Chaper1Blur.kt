@@ -58,15 +58,7 @@ fun Chapter1Blur(
 @Composable
 fun EmbossImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "Emboss (Custom Kernel)")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.emboss().asImageBitmap(),
             contentDescription = null,
@@ -78,15 +70,7 @@ fun EmbossImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
 @Composable
 fun RidgeDetect2ImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "Ridge Detection 2 (Custom Kernel)")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.ridgeDetection2().asImageBitmap(),
             contentDescription = null,
@@ -98,15 +82,7 @@ fun RidgeDetect2ImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
 @Composable
 fun RidgeDetect1ImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "Ridge Detection 1 (Custom Kernel)")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.ridgeDetection1().asImageBitmap(),
             contentDescription = null,
@@ -118,15 +94,7 @@ fun RidgeDetect1ImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
 @Composable
 fun UnSharpenImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "UnSharpen Image(Custom Kernel)")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.gaussianBlur(5.0).unSharpeMask().asImageBitmap(),
             contentDescription = null,
@@ -138,15 +106,7 @@ fun UnSharpenImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
 @Composable
 fun SharpenImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "Sharpen Image(Custom Kernel)")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.sharpenImage().asImageBitmap(),
             contentDescription = null,
@@ -158,15 +118,7 @@ fun SharpenImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
 @Composable
 fun MedianBlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "Median Blur Image")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.medianBlur().asImageBitmap(),
             contentDescription = null,
@@ -178,15 +130,7 @@ fun MedianBlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
 @Composable
 fun GaussianBlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "Gaussian Blur Image")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.gaussianBlur().asImageBitmap(),
             contentDescription = null,
@@ -198,15 +142,7 @@ fun GaussianBlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
 @Composable
 fun BlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
     HeaderRow(right = "Blur Image")
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Image(
-            bitmap = bitmap.asImageBitmap(),
-            contentDescription = null,
-            modifier = Modifier.size(imageSize)
-        )
+    ImageOpsRow(bitmap, imageSize) {
         Image(
             bitmap = bitmap.blur().asImageBitmap(),
             contentDescription = null,
@@ -234,5 +170,20 @@ fun HeaderRow(left: String = "Original Image", right: String) {
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp
         )
+    }
+}
+
+@Composable
+inline fun ImageOpsRow(bitmap: Bitmap, imageSize: Dp, block: () -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        block()
     }
 }

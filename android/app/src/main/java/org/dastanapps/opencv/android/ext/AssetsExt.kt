@@ -32,3 +32,11 @@ fun loadSquirelImage(context: Context): Bitmap {
 fun loadGeeksForGeeksImage(context: Context): Bitmap {
     return loadImageAssets(context, "geeksforgeeks.png")
 }
+
+fun loadErosionImage(context: Context): Bitmap {
+    return loadImageAssets(context, "erosion.jpg")
+}
+
+fun loadDilationImage(context: Context): Bitmap {
+    return loadImageAssets(context, "dilation.jpg")
+}

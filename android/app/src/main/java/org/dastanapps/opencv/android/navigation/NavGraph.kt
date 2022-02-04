@@ -8,6 +8,7 @@ import org.dastanapps.opencv.android.screen.Chapters
 import org.dastanapps.opencv.android.screen.Home
 import org.dastanapps.opencv.android.screen.ShowTutorial
 import org.dastanapps.opencv.android.screen.Tutorials
+import org.dastanapps.opencv.android.tutorials.mocva.Chaper1MorphologicalOps
 import org.dastanapps.opencv.android.tutorials.mocva.Chapter1Blur
 import org.dastanapps.opencv.android.vm.Chapter
 import org.dastanapps.opencv.android.vm.MainViewModel
@@ -77,6 +78,7 @@ fun Navigation(
             list?.first()?.run {
                 when (this.id) {
                     111 -> Chapter1Blur(name!!, navController)
+                    112 -> Chaper1MorphologicalOps(name!!, navController)
                     else -> ShowTutorial(name!!, this, navController)
                 }
             }
