@@ -2,27 +2,23 @@ package org.dastanapps.opencv.android.tutorials.mocva
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import org.dastanapps.opencv.android.ext.bitmap
+import org.dastanapps.opencv.android.ext.*
 import org.dastanapps.opencv.android.navigation.imageUri
 import org.dastanapps.opencv.android.ui.MyAppBarBackArrow
-import org.opencv.android.Utils
-import org.opencv.core.CvType
-import org.opencv.core.Mat
-import org.opencv.core.Size
-import org.opencv.imgproc.Imgproc
 
 /**
  *
@@ -36,6 +32,7 @@ fun Chapter1Blur(
 ) {
     val context = LocalContext.current
     val bmp = bitmap(context, imageUri)
+
     MyAppBarBackArrow(
         title = name,
         navgationIcon = {
@@ -43,33 +40,116 @@ fun Chapter1Blur(
         }
     ) {
         val scrollState = rememberScrollState()
-        bmp?.run {
-            val src = Mat(height, width, CvType.CV_8UC4)
-            Utils.bitmapToMat(this, src)
-            Imgproc.blur(src, src, Size(3.0, 3.0))
-            val processedImg = Bitmap.createBitmap(src.cols(), src.rows(), Bitmap.Config.ARGB_8888)
-            Utils.matToBitmap(src, processedImg)
-            Column(
-                modifier = Modifier.verticalScroll(state = scrollState)
-            ) {
-                Text(
-                    "Original Image",
-                    modifier = Modifier.padding(4.dp),
-                    fontWeight = FontWeight.Bold
-                )
-                Image(
-                    bitmap = this@run.asImageBitmap(),
-                    contentDescription = null,
-//                    modifier = Modifier.size(400.dp)
-                )
-                Text("Blur Image", modifier = Modifier.padding(4.dp), fontWeight = FontWeight.Bold)
-                Image(
-                    bitmap = processedImg.asImageBitmap(),
-                    contentDescription = null,
-//                    modifier = Modifier.size(400.dp)
-                )
+        Column(
+            modifier = Modifier.verticalScroll(state = scrollState).padding(bottom = 16.dp)
+        ) {
+            BlurRow(bmp ?: loadGaussianNoiseImage(context))
+            GaussianBlurRow(bmp ?: loadGaussianNoiseImage(context))
+            MedianBlurRow(bmp ?: loadSaltNPapperImage(context))
+            SharpenImageRow(bmp ?: loadGaussianNoiseImage(context))
+        }
+    }
+}
 
-            }
-        } ?: Text("No Image Found", modifier = Modifier.padding(16.dp).fillMaxWidth())
+
+@Composable
+fun SharpenImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "Sharpen Image(Custom Kernel)")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.sharpenImage().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
+
+@Composable
+fun MedianBlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "Median Blur Image")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.medianBlur().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
+
+@Composable
+fun GaussianBlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "Gaussian Blur Image")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.gaussianBlur().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
+
+@Composable
+fun BlurRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "Blur Image")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.blur().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
+
+@Composable
+fun HeaderRow(left: String = "Original Image", right: String) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            left,
+            modifier = Modifier.padding(4.dp),
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp
+        )
+        Text(
+            right,
+            modifier = Modifier.padding(8.dp),
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp
+        )
     }
 }
