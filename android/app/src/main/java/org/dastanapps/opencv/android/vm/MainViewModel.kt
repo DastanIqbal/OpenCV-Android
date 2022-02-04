@@ -39,6 +39,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 Chapter(
                     110,
                     "Applying Effects to Images"
+                ),
+                Chapter(
+                    120,
+                    "Detecting Basic Features in Images"
                 )
             )
         )
@@ -50,6 +54,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 Tutorial(111, "Blur"),
                 Tutorial(112, "Morphological Operations"),
                 Tutorial(113, "Thresholding")
+            )
+        )
+        put(
+            120, arrayListOf(
+                Tutorial(121, "Edge and Corner Detection"),
+                Tutorial(122, "Hough Transformations"),
+                Tutorial(123, "Contours"),
+                Tutorial(124, "Detecting Sudoku Puzzle")
             )
         )
     }
