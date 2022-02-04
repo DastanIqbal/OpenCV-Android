@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory
  * "Iqbal Ahmed" created on 04/02/2022
  */
 
+const val IMG_THRESHOLD_GRADIENT = "threshold-gradient.png"
+const val IMG_THRESHOLD_SUDUKU = "threshold-suduku.png"
 
 fun loadImageAssets(context: Context, fileName: String): Bitmap {
     val inputStream = context.assets.open(fileName)

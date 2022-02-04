@@ -13,7 +13,7 @@ import org.opencv.imgproc.Imgproc
  */
 
 
-inline fun Bitmap.processMat(block: (Mat) -> Unit): Bitmap {
+inline fun Bitmap.processMat(block: (src: Mat) -> Unit): Bitmap {
     val src = Mat(height, width, CvType.CV_8UC4)
     Utils.bitmapToMat(this, src)
 
