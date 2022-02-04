@@ -24,3 +24,11 @@ fun loadGaussianNoiseImage(context: Context): Bitmap {
 fun loadSaltNPapperImage(context: Context): Bitmap {
     return loadImageAssets(context, "salt-and-pepper.png")
 }
+
+fun loadSquirelImage(context: Context): Bitmap {
+    return loadImageAssets(context, "squirel.png")
+}
+
+fun loadGeeksForGeeksImage(context: Context): Bitmap {
+    return loadImageAssets(context, "geeksforgeeks.png")
+}

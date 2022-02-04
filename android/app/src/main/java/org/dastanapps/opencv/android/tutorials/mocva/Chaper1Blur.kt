@@ -46,11 +46,94 @@ fun Chapter1Blur(
             BlurRow(bmp ?: loadGaussianNoiseImage(context))
             GaussianBlurRow(bmp ?: loadGaussianNoiseImage(context))
             MedianBlurRow(bmp ?: loadSaltNPapperImage(context))
-            SharpenImageRow(bmp ?: loadGaussianNoiseImage(context))
+            EmbossImageRow(bmp ?: loadGeeksForGeeksImage(context))
+            SharpenImageRow(bmp ?: loadSquirelImage(context))
+            UnSharpenImageRow(bmp ?: loadSquirelImage(context))
+            RidgeDetect1ImageRow(bmp ?: loadSquirelImage(context))
+            RidgeDetect2ImageRow(bmp ?: loadSquirelImage(context))
         }
     }
 }
 
+@Composable
+fun EmbossImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "Emboss (Custom Kernel)")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.emboss().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
+
+@Composable
+fun RidgeDetect2ImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "Ridge Detection 2 (Custom Kernel)")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.ridgeDetection2().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
+
+@Composable
+fun RidgeDetect1ImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "Ridge Detection 1 (Custom Kernel)")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.ridgeDetection1().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
+
+@Composable
+fun UnSharpenImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
+    HeaderRow(right = "UnSharpen Image(Custom Kernel)")
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Image(
+            bitmap = bitmap.gaussianBlur(5.0).unSharpeMask().asImageBitmap(),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+    }
+}
 
 @Composable
 fun SharpenImageRow(bitmap: Bitmap, imageSize: Dp = 150.dp) {
