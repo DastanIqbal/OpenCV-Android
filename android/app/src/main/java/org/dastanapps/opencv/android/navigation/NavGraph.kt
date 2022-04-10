@@ -78,9 +78,11 @@ fun Navigation(
             val list = viewModel.tutorial(chapterId!!, tutorialId!!)
             list?.first()?.run {
                 when (this.id) {
+                    /** Chapter 1 */
                     111 -> Chapter1Blur(name!!, navController)
                     112 -> Chaper1MorphologicalOps(name!!, navController)
                     113 -> Chapter1Thresholding(name!!, navController)
+                    /** Chapter 2 */
                     else -> ShowTutorial(name!!, this, navController)
                 }
             }

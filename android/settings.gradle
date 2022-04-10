@@ -5,11 +5,20 @@ pluginManagement {
         mavenCentral()
     }
 }
+enableFeaturePreview('VERSION_CATALOGS')
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+    }
+    versionCatalogs {
+        create("deps") {
+            version("appcompat", "1.4.1")
+
+            alias("android-appcompat").to("androidx.appcompat", "appcompat").versionRef("appcompat")
+        }
     }
 }
 rootProject.name = "LearnOpenCV-Android"
